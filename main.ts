@@ -339,7 +339,7 @@ const search = async (query: string, info: SearchInfo) => {
               }
               illusts = illusts.filter((i) => i.type === kind)
               illusts = illusts.filter((i) => r18 ? i.x_restrict === 1 : i.x_restrict === 0)
-              illusts = illusts.filter((i) => ai ? i.illust_ai_type === 2 : i.illust_ai_type !== 2)
+              illusts = illusts.filter((i) => ai ? pixiv.util.isAI(i) : !pixiv.util.isAI(i))
           }
           let current = id
           let downloaded = false
@@ -415,7 +415,7 @@ const search = async (query: string, info: SearchInfo) => {
               }
           }
           illusts = illusts.filter((i) => r18 ? i.x_restrict === 1 : i.x_restrict === 0)
-          illusts = illusts.filter((i) => ai ? i.illust_ai_type === 2 : i.illust_ai_type !== 2)
+          illusts = illusts.filter((i) => ai ? pixiv.util.isAI(i) : !pixiv.util.isAI(i))
           .slice(0, Number(limit))
       }
       let items = [] as any
